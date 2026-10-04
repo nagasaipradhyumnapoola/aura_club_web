@@ -17,6 +17,15 @@ function handleOf(url: string) {
   }
 }
 
+function lastSegment(url: string) {
+  try {
+    const seg = new URL(url).pathname.split("/").filter(Boolean).pop();
+    return seg ?? url;
+  } catch {
+    return url;
+  }
+}
+
 /** Instagram, Email and LinkedIn, in that order. LinkedIn stays a plain placeholder until a URL is set. */
 function connectLinks(): Link[] {
   const { linkedin, instagram, email } = site.social;
@@ -25,7 +34,7 @@ function connectLinks(): Link[] {
   if (email) out.push({ label: "Email", detail: email, href: `mailto:${email}`, external: false });
   out.push(
     linkedin
-      ? { label: "LinkedIn", detail: "AURA on LinkedIn", href: linkedin, external: true }
+      ? { label: "LinkedIn", detail: lastSegment(linkedin), href: linkedin, external: true }
       : { label: "LinkedIn", detail: "Coming soon", href: null, external: false },
   );
   return out;

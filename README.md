@@ -21,7 +21,7 @@ Node 20+ is fine.
 
 | What | Where |
 | --- | --- |
-| Instagram, email, LinkedIn | [`data/site.ts`](data/site.ts). Instagram and email are set; LinkedIn shows as an unlinked "Coming soon" placeholder until you add its URL. |
+| Instagram, email, LinkedIn | [`data/site.ts`](data/site.ts). All three are set; an empty value shows as an unlinked "Coming soon" row. |
 | What we do / principles / structure / recruitment copy | [`data/activities.ts`](data/activities.ts), [`data/principles.ts`](data/principles.ts), [`data/structure.ts`](data/structure.ts), [`data/recruitment.ts`](data/recruitment.ts) |
 | Application questions, limits, validation | [`lib/validation/application.ts`](lib/validation/application.ts) — shared by the browser and the server |
 
