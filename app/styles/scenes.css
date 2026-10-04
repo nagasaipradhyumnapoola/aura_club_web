@@ -771,7 +771,7 @@
   gap: 2.4rem;
 }
 .ct-h {
-  color: var(--ink-3);
+  color: var(--ink-2);
   margin: 0 0 0.9rem;
   font-weight: 400;
 }
@@ -814,10 +814,10 @@
   overflow-wrap: anywhere;
 }
 .ct-social-k {
-  color: var(--ink-3);
+  color: var(--ink-2);
 }
 .ct-social-off {
-  color: var(--ink-3);
+  color: var(--ink-2);
   cursor: default;
 }
 .ct-name {
@@ -826,7 +826,7 @@
   line-height: 1.2;
 }
 .ct-role {
-  color: var(--ink-3);
+  color: var(--ink-2);
   margin-bottom: 0.6rem;
 }
 .ct-foot {

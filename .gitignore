@@ -1,8 +1,6 @@
 node_modules
 .next
 out
-.env*.local
-.env
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
@@ -13,3 +11,8 @@ review-receipts/
 
 # local tooling
 .claude/
+
+# environment files stay out of the repo — only the template is committed
+.env
+.env.*
+!.env.example

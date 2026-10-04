@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import gsap from "gsap";
 import { site, telHref } from "@/data/site";
 import { AuraLogo } from "@/components/aura/AuraLogo";
 import { useScene, useSparkTrack } from "@/lib/motion/hooks";
@@ -42,12 +43,27 @@ export function ContactSection() {
 
   useScene(
     scene,
-    ({ tl, q }) => {
-      tl.fromTo(q(".ct-logo"), { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.26, ease: "power3.inOut" }, 0.06);
-      tl.fromTo(q(".ct-tag .ln-i"), { yPercent: 110, opacity: 1 }, { yPercent: 0, duration: 0.18, ease: "power4.out" }, 0.26);
-      tl.fromTo(q(".ct-inst"), { opacity: 0 }, { opacity: 1, duration: 0.16 }, 0.36);
-      tl.fromTo(q(".ct-block"), { opacity: 0, y: 24 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.18, ease: "power2.out" }, 0.5);
-      tl.fromTo(q(".ct-foot"), { opacity: 0 }, { opacity: 1, duration: 0.14 }, 0.88);
+    ({ tl, q, pinned }) => {
+      if (pinned) {
+        tl.fromTo(q(".ct-logo"), { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.26, ease: "power3.inOut" }, 0.06);
+        tl.fromTo(q(".ct-tag .ln-i"), { yPercent: 110, opacity: 1 }, { yPercent: 0, duration: 0.18, ease: "power4.out" }, 0.26);
+        tl.fromTo(q(".ct-inst"), { opacity: 0 }, { opacity: 1, duration: 0.16 }, 0.36);
+        tl.fromTo(q(".ct-block"), { opacity: 0, y: 24 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.18, ease: "power2.out" }, 0.5);
+        tl.fromTo(q(".ct-foot"), { opacity: 0 }, { opacity: 1, duration: 0.14 }, 0.88);
+        return;
+      }
+      // Phones / flowing layout: each piece reveals once, fully, as it enters. Nothing here is
+      // scrubbed, so a short or collapsing viewport can never leave the details half faded.
+      const once = (sel: string, from: gsap.TweenVars, to: gsap.TweenVars) => {
+        const t = q(sel);
+        if (!t.length) return;
+        gsap.fromTo(t, from, { ...to, scrollTrigger: { trigger: t[0], start: "top 96%", once: true } });
+      };
+      once(".ct-logo", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "power3.inOut" });
+      once(".ct-tag .ln-i", { yPercent: 110, opacity: 1 }, { yPercent: 0, duration: 0.9, ease: "power4.out" });
+      once(".ct-inst", { opacity: 0 }, { opacity: 1, duration: 0.8 });
+      once(".ct-block", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" });
+      once(".ct-foot", { opacity: 0 }, { opacity: 1, duration: 0.8 });
     },
     live,
   );

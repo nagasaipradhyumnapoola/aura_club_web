@@ -30,7 +30,7 @@ There are no member counts, dates, partners, testimonials or other statistics on
 ## Applications → Supabase
 
 1. Create a Supabase project and run [`supabase/migrations/0001_aura_applications.sql`](supabase/migrations/0001_aura_applications.sql). RLS is enabled with **no public policies**: only the server (service role) can write, and nobody can read through the public API.
-2. Copy `.env.example` to `.env.local` and fill in `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. Never prefix them with `NEXT_PUBLIC_`.
+2. Env files are never committed (every `.env*` except the `.env.example` template is git-ignored). Copy `.env.example` to `.env.local` and fill in `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. Never prefix them with `NEXT_PUBLIC_`.
 3. Submissions go to `POST /api/apply` ([`app/api/apply/route.ts`](app/api/apply/route.ts)).
 
 Until those variables exist the endpoint answers `503`, and the form shows a clear message and **keeps everything the applicant typed**. It never pretends to have saved.

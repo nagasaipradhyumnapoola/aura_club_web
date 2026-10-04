@@ -50,7 +50,7 @@ export function AuraFigure() {
       }
       el.style.visibility = "visible";
       // ease off at the very end so the contact details stay easy to read
-      const endDim = 1 - 0.5 * smooth(max - vh * 1.4, max - vh * 0.2, y);
+      const endDim = 1 - 0.62 * smooth(max - vh * 1.4, max - vh * 0.2, y);
       el.style.opacity = (fade * endDim).toFixed(3);
 
       // rise: low in the frame at the start of the page, high at the end of it
