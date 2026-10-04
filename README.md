@@ -21,7 +21,7 @@ Node 20+ is fine.
 
 | What | Where |
 | --- | --- |
-| Social links, email, Operations contact | [`data/site.ts`](data/site.ts). Instagram and email are set; LinkedIn shows as an unlinked "Coming soon" placeholder until you add its URL. |
+| Instagram, email, LinkedIn | [`data/site.ts`](data/site.ts). Instagram and email are set; LinkedIn shows as an unlinked "Coming soon" placeholder until you add its URL. |
 | What we do / principles / structure / recruitment copy | [`data/activities.ts`](data/activities.ts), [`data/principles.ts`](data/principles.ts), [`data/structure.ts`](data/structure.ts), [`data/recruitment.ts`](data/recruitment.ts) |
 | Application questions, limits, validation | [`lib/validation/application.ts`](lib/validation/application.ts) — shared by the browser and the server |
 
@@ -47,7 +47,7 @@ What the endpoint does, in order: per-IP rate limit → size limit → JSON/shap
 
 - **One spark.** [`components/aura/AuraSpark.tsx`](components/aura/AuraSpark.tsx) is a single fixed SVG, driven by the engine in [`lib/motion/spark.ts`](lib/motion/spark.ts). Every scene registers a few *waypoints* (`useSparkTrack`) — scroll position plus where the spark is, how big, how rotated, in front of or behind the type, filled or outlined. The engine interpolates between them with inertia, a slight stretch with scroll velocity, and a faint pointer disturbance on desktop. In front of text it uses `mix-blend-mode: difference`, so it cuts through type in both themes.
 - **Scenes.** On desktop each scene is a CSS `position: sticky` stage with a scrubbed GSAP timeline ([`useScene`](lib/motion/hooks.ts)); on phones the same scenes flow normally and reveal as they pass. No ScrollTrigger pinning is used.
-- **Logo and header.** The wordmark never moves: it fades in (opacity only), and fades out as you scroll away. The top bar has no name: the floating AURA spark sits at the top left, the menu and the colour (theme) switch on the right, on translucent glass. The bar appears once you scroll past the opening.
+- **Logo and header.** The wordmark never moves on its own: it just fades in. Scrolling carries it ([`DockLogo`](components/navigation/DockLogo.tsx)) into the middle of the top bar. The bar reads, left to right: the floating AURA spark, the AURA name, then the menu and the colour (theme) switch, on translucent glass. The bar appears once you scroll past the opening; below 1240 px the links collapse into a Menu button.
 - **Floating figure.** [`AuraFigure`](components/aura/AuraFigure.tsx) is the supplied aura image (`public/aura/figure.webp`, converted so its dark background is transparent and it works in both themes). It fades in once the logo has left the hero, bobs gently, and drifts upward over the whole length of the page.
 - **Application reveal.** The CTA sends the spark into the button, then the application layer opens through a spark-shaped clip path (an ink-coloured copy leads, the page-coloured layer follows).
 - **Cursor.** A small dot that becomes a ring on links, a caret over fields, the spark over the wordmark, a labelled disc on the main CTA. Touch devices get a short ripple on tap instead. Hover effects only apply on hover-capable devices.

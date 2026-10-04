@@ -10,13 +10,6 @@ export const site = {
     email: "aura.srmist@gmail.com",
   },
 
-  contacts: {
-    operationsHead: {
-      name: "G R Hemanth",
-      role: "Operations Head",
-      phone: "+91 76808 78823",
-    },
-  },
 } as const;
 
 export type Site = typeof site;
@@ -28,6 +21,3 @@ export const nav = [
   { id: "recruitment", label: "Recruitment" },
 ] as const;
 
-export function telHref(phone: string) {
-  return `tel:+${phone.replace(/[^\d]/g, "")}`;
-}

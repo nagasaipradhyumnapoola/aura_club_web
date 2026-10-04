@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import gsap from "gsap";
-import { site, telHref } from "@/data/site";
+import { site } from "@/data/site";
 import { AuraLogo } from "@/components/aura/AuraLogo";
 import { useScene, useSparkTrack } from "@/lib/motion/hooks";
 
@@ -34,7 +34,6 @@ function connectLinks(): Link[] {
 export function ContactSection() {
   const scene = useRef<HTMLElement>(null);
   const links = connectLinks();
-  const ops = site.contacts.operationsHead;
   const year = new Date().getFullYear();
 
   // last section: on phones it can only scroll until its bottom meets the viewport bottom,
@@ -99,12 +98,7 @@ export function ContactSection() {
 
         <div className="ct-cols">
           <div className="ct-block" data-hide>
-            <h2 className="t-mono ct-h">Operations</h2>
-            <p className="ct-name">{ops.name}</p>
-            <p className="ct-role">{ops.role}</p>
-            <a className="ct-link ct-phone" href={telHref(ops.phone)}>
-              {ops.phone}
-            </a>
+            <h2 className="t-mono ct-h">Connect</h2>
 
             <ul className="ct-links" aria-label="Connect with AURA">
               {links.map((l) => (
