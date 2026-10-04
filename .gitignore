@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.env*.local
+.env
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+
+# hook-generated audit logs
+receipts/
+review-receipts/
+
+# local tooling
+.claude/

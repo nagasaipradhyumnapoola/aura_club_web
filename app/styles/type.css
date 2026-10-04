@@ -1,0 +1,31 @@
+/* ------------------------------------------------------------------ type */
+.t-display {
+  font-family: var(--font-display), "Arial Narrow", Impact, sans-serif;
+  font-weight: 800;
+  font-stretch: calc(var(--wdth) * 1%);
+  font-variation-settings: "wdth" var(--wdth);
+  text-transform: uppercase;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+}
+
+.t-mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  line-height: 1.45;
+}
+
+/* masked headline lines */
+.ln {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+}
+.ln-i {
+  display: block;
+  will-change: transform;
+}
+
