@@ -11,8 +11,11 @@ import { spark, type SparkPose } from "@/lib/motion/spark";
 import { ui } from "@/lib/motion/store";
 
 /**
- * Opening: empty space, then the wordmark simply appears — it never moves. Scrolling fades it
- * out and the spark breaks away to guide the rest of the page.
+ * Opening: empty space, then the wordmark simply appears — it never moves on its own. Scrolling
+ * carries it into the middle of the top bar (DockLogo) and the spark breaks away to guide the page.
+ *
+ * The wordmark rendered here is an invisible layout placeholder (and the page's h1); the visible
+ * logo is the fixed DockLogo, positioned from this element's rectangle.
  */
 export function IntroSequence() {
   const sec = useRef<HTMLElement>(null);
@@ -43,8 +46,7 @@ export function IntroSequence() {
   useScene(
     sec,
     ({ tl, q }) => {
-      // nothing moves: the wordmark and its supporting text simply fade as you scroll away
-      tl.fromTo(q("[data-logo-wrap]"), { opacity: 1 }, { opacity: 0, ease: "power1.in", duration: 0.7, immediateRender: false }, 0);
+      // the supporting text fades out; the wordmark itself is carried to the top bar by DockLogo
       tl.fromTo(q("[data-intro-text]"), { opacity: 1 }, { opacity: 0, ease: "power1.in", duration: 0.45, immediateRender: false }, 0);
       tl.fromTo(q("[data-intro-cue]"), { opacity: 1 }, { opacity: 0, duration: 0.12, immediateRender: false }, 0);
     },
@@ -56,7 +58,7 @@ export function IntroSequence() {
     const root = sec.current;
     if (!root) return;
     const reduced = prefersReducedMotion();
-    const dock = root.querySelector<HTMLElement>("[data-logo-wrap]");
+    const dock = document.querySelector<HTMLElement>(".dock-logo");
     const text = gsap.utils.toArray<HTMLElement>("[data-intro-text]", root);
     const cue = root.querySelector<HTMLElement>("[data-intro-cue]");
     const skip = reduced || window.scrollY > 40 || window.location.hash.length > 1;

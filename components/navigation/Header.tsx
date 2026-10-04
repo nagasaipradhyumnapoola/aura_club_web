@@ -5,11 +5,12 @@ import { ui, useStore } from "@/lib/motion/store";
 import { scrollToY } from "@/lib/motion/scroll";
 import { useAura } from "@/components/aura/AuraProvider";
 import { SparkShape } from "@/components/aura/SparkShape";
+import { DockLogo } from "./DockLogo";
 import { ThemeToggle } from "./ThemeToggle";
 
 /**
- * Top bar: the floating AURA spark at the top left (no wordmark), the menu and the colour (theme)
- * switch on the right, all on a translucent glass bar.
+ * Top bar, left to right: the floating AURA spark, the AURA name (docked in the
+ * middle by DockLogo), then the menu and the colour (theme) switch — on a translucent glass bar.
  */
 export function Header() {
   const visible = useStore(ui, (s) => s.headerVisible, false);
@@ -18,6 +19,7 @@ export function Header() {
   const { goTo } = useAura();
 
   return (
+    <>
     <header className="aura-header" data-visible={visible && !appOpen ? "true" : "false"}>
       <a
         href="#top"
@@ -30,6 +32,8 @@ export function Header() {
       >
         <SparkShape className="aura-header-mark-svg" />
       </a>
+
+      <span className="aura-header-gap" aria-hidden="true" />
 
       <div className="aura-header-right">
         <nav aria-label="Primary" className="aura-header-nav t-mono">
@@ -58,5 +62,7 @@ export function Header() {
         </button>
       </div>
     </header>
+    <DockLogo />
+    </>
   );
 }

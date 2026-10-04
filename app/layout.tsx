@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootstrap }} />
         <noscript>
-          <style>{`[data-hide],.ln-i,[data-intro-text],[data-intro-cue],.intro-logo{opacity:1!important;visibility:visible!important;transform:none!important}`}</style>
+          <style>{`[data-hide],.ln-i,[data-intro-text],[data-intro-cue]{opacity:1!important;visibility:visible!important;transform:none!important}`}</style>
         </noscript>
       </head>
       <body>

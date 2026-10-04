@@ -410,9 +410,9 @@ html.has-cursor * {
   inset: 0 0 auto 0;
   z-index: 60;
   height: var(--hdr-h);
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   padding: 0 var(--gut);
   color: var(--ink);
   /* translucent glass: the floating figure and the page show through */
@@ -436,10 +436,11 @@ html.has-cursor * {
     visibility 0s linear 0.5s;
 }
 
-/* the AURA spark, top left, hovering */
+/* the AURA spark, top left — hovering */
 .aura-header-mark {
   display: inline-flex;
   align-items: center;
+  justify-self: start;
   min-height: 44px;
   padding-right: 12px;
   color: var(--ink);
@@ -474,6 +475,36 @@ html.has-cursor * {
   }
 }
 
+/* room for the docked AURA name */
+.aura-header-gap {
+  display: block;
+  width: calc(92px + 28px);
+}
+@media (max-width: 639px) {
+  .aura-header-gap {
+    width: calc(74px + 20px);
+  }
+}
+
+/* the visible AURA name: carried from the hero into the middle of the bar by scroll */
+.dock-logo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 61;
+  display: block;
+  color: var(--ink);
+  transform-origin: 0 0;
+  will-change: transform;
+  opacity: 0;
+}
+.dock-logo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
 .aura-header a,
 .aura-header button {
   color: inherit;
@@ -482,6 +513,8 @@ html.has-cursor * {
   min-height: 44px;
 }
 .aura-header-right {
+  grid-column: 3;
+  justify-self: end;
   display: flex;
   align-items: center;
   gap: clamp(8px, 1.6vw, 28px);
@@ -515,11 +548,11 @@ html.has-cursor * {
   border: 0;
   background: none;
 }
-@media (min-width: 1080px) {
+@media (min-width: 1240px) {
   .aura-header-nav {
     display: flex;
   }
-  .aura-menu-trigger {
+  .aura-header .aura-menu-trigger {
     display: none;
   }
 }
@@ -551,10 +584,10 @@ html.has-cursor * {
 /* ------------------------------------------------------------------ the floating figure */
 :root {
   --fig-h: 150svh;
-  --fig-max: 1;
+  --fig-max: 0.82;
 }
 :root[data-theme="light"] {
-  --fig-max: 1;
+  --fig-max: 0.9;
 }
 .aura-figure {
   position: fixed;
@@ -578,9 +611,13 @@ html.has-cursor * {
   will-change: transform;
   user-select: none;
 }
+/* the still-picture fallback gets the same softness the shader gives the animated one */
+img.aura-figure-img {
+  filter: blur(1.4px);
+}
 @media (max-width: 767px) {
   :root {
-    --fig-max: 0.92;
+    --fig-max: 0.74;
   }
 }
 @media (min-width: 768px) {
@@ -685,8 +722,9 @@ html.has-cursor * {
   width: min(88vw, 1180px, calc((100svh - 230px) / 0.334));
   min-width: min(300px, 88vw);
 }
-html[data-js] .intro-logo {
-  opacity: 0;
+/* the fixed DockLogo is the visible wordmark once JS runs; this one only holds the layout */
+html[data-js] .intro-logo-svg {
+  visibility: hidden;
 }
 .intro-logo-svg {
   display: block;

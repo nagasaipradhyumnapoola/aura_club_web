@@ -72,7 +72,7 @@ export function MobileNavigation() {
     };
     window.addEventListener("keydown", onKey);
     // leaving the mobile layout while open would strand the user in a hidden menu
-    const mq = window.matchMedia("(min-width: 900px)");
+    const mq = window.matchMedia("(min-width: 1240px)");
     const onMq = () => mq.matches && ui.set({ menuOpen: false });
     mq.addEventListener("change", onMq);
     return () => {
